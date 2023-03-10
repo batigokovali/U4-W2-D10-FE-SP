@@ -33,23 +33,9 @@ const MovieDetails = () => {
     }
   };
 
-  const moviePDF = async () => {
-    try {
-      let response = await fetch(process.env.REACT_APP_BE_DEV_URL + "/medias/" + imdbID + "/pdf ")
-      if (response.ok) {
-        let pdfurl = await response.json()
-        console.log(pdfurl)
-      }
-    } catch (error) {
-      console.log(error);
-      setIsError(true);
-    }
-  }
-
   useEffect(() => {
     if (imdbID) {
       fetchMovieDetails();
-      moviePDF()
     }
   }, [imdbID]);
 
