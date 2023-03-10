@@ -11,7 +11,7 @@ const MyMovies = (props) => {
 
   const fetchMovies = async () => {
     try {
-      let response = await fetch(process.env.REACT_APP_BE_DEV_URL + "/medias" + "");
+      let response = await fetch(process.env.REACT_APP_BE_DEV_URL + "/medias");
       if (response.ok) {
         console.log(response)
         let data = await response.json();
