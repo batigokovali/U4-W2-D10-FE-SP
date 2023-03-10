@@ -90,7 +90,7 @@ const MovieDetails = () => {
             </Card.Text>
             <Card.Text>IMDB Rating: {movieDetails.imdbRating}</Card.Text>
             <Card.Text>{movieDetails.Plot}</Card.Text>
-            <Card.Text>Download the movie info as <a href={process.env.REACT_APP_BE_DEV_URL + "/medias/" + imdbID + "/pdf "} target={"_blank"}>PDF</a> </Card.Text>
+            <Card.Text>Download the movie info as <a href={process.env.REACT_APP_BE_DEV_URL + "/medias/" + imdbID + "/pdf"}>PDF</a> </Card.Text>
           </Col>
         </Row>
       </Card>
