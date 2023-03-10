@@ -12,11 +12,11 @@ const MovieDetails = () => {
   const [movieDetails, setMovieDetails] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
+  const [pdf, setPdf] = useState()
 
   const fetchMovieDetails = async () => {
     try {
       let response = await fetch(url + imdbID);
-      console.log(response);
       if (response.ok) {
         let dataRaw = await response.json();
         let data = dataRaw;
@@ -33,9 +33,23 @@ const MovieDetails = () => {
     }
   };
 
+  const moviePDF = async () => {
+    try {
+      let response = await fetch(process.env.REACT_APP_BE_DEV_URL + "/medias/" + imdbID + "/pdf ")
+      if (response.ok) {
+        let pdfurl = await response.json()
+        console.log(pdfurl)
+      }
+    } catch (error) {
+      console.log(error);
+      setIsError(true);
+    }
+  }
+
   useEffect(() => {
     if (imdbID) {
       fetchMovieDetails();
+      moviePDF()
     }
   }, [imdbID]);
 
@@ -72,11 +86,11 @@ const MovieDetails = () => {
             <Card.Title>{movieDetails.Title}</Card.Title>
             <Card.Text>By {movieDetails.Writer}</Card.Text>
             <Card.Text>
-              {movieDetails.Country} | {movieDetails.Genre} | Released at:{" "}
-              {movieDetails.Released}
+              {movieDetails.Country} | {movieDetails.Genre} | Released at: {movieDetails.Released}
             </Card.Text>
             <Card.Text>IMDB Rating: {movieDetails.imdbRating}</Card.Text>
             <Card.Text>{movieDetails.Plot}</Card.Text>
+            <Card.Text>Download the movie info as <a href={process.env.REACT_APP_BE_DEV_URL + "/medias/" + imdbID + "/pdf "} target={"_blank"}>PDF</a> </Card.Text>
           </Col>
         </Row>
       </Card>
